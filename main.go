@@ -83,19 +83,19 @@ func main() {
 
 		// TODO: maybe we only need to close one side
 		var wg sync.WaitGroup
-		wg.Add(1)
+		wg.Add(2)
 
 		go func() {
 			io.Copy(inConn, outConn)
+			wg.Done()
+			wg.Wait()
+            outConn.Close()
 		}()
 		go func() {
 			io.Copy(outConn, inConn)
 			wg.Done()
+			wg.Wait()
+            outConn.Close()
 		}()
-
-		wg.Wait()
-
-		outConn.Close()
-		inConn.Close()
 	}
 }
