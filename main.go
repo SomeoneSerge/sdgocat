@@ -61,6 +61,8 @@ func ActivationListeners() []net.Listener {
 }
 
 func main() {
+	flag.Parse()
+
 	listeners := ActivationListeners()
 
 	if len(listeners) != 1 {
