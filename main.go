@@ -75,6 +75,7 @@ func main() {
 		if err != nil {
 			log.Panicf("unable to accept connection: %v", err)
 		}
+		log.Printf("Accepted a connection from %s at %s. Connecting to %s", inConn.RemoteAddr(), inConn.LocalAddr(), *remoteAddr)
 
 		outConn, err := net.Dial("tcp", *remoteAddr)
 		if err != nil {
